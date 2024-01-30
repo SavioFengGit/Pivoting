@@ -1,7 +1,7 @@
 # Pivoting
 Let's perform pivoting!
 # Introduction of the Pivoting technique
-Pivoting is a technique in cyber security that allows an attacker to move from one compromised system to another within a network. It simulates how a real attacker would try to access more valuable or vulnerable targets by using a foothold machine as a bridge. There are different types of pivoting, such as port forwarding, VPN pivoting, and SOCKS proxy pivoting12. Pivoting is also related to lateral movement, which involves privilege escalation on the same or different machines.<br>
+Pivoting is a technique in cyber security that allows an attacker to move from one compromised system to another within a network. It simulates how a real attacker would try to access more valuable or vulnerable targets by using a foothold machine as a bridge. There are different types of pivoting, such as port forwarding, VPN pivoting, and SOCKS proxy pivoting. Pivoting is also related to lateral movement, which involves privilege escalation on the same or different machines.<br>
 <img src="pivoting.png" width=70% height="auto"><br><br>
 ## Example of Pivoting <br>
 ### **We are in the DMZ. After obtaining the initial access to a target, we will use it to perform pivoting on the internal network..<br>**

